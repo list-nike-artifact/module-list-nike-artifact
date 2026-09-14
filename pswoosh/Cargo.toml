@@ -1,0 +1,34 @@
+[package]
+name = "pswoosh-native"
+version = "0.1.0"
+edition = "2021"
+
+# Passive-SWOOSH [USENIX Security 2024], ported from the authors' reference
+# Rust implementation (`rust/ref0`) so that it builds and runs natively on
+# aarch64.  See `src/lib.rs` for what changed and why.
+
+[lib]
+name = "pswoosh"
+path = "src/lib.rs"
+
+[[bin]]
+name = "bench"
+path = "src/bin/bench.rs"
+
+[[bin]]
+name = "kat"
+path = "src/bin/kat.rs"
+
+# The field multiplication has a hand-written aarch64 version, used by default.
+# Building with `--features portable-fq` selects the portable Rust one instead,
+# which is how the sensitivity of the reported figures to the quality of the
+# arithmetic is measured.
+[features]
+portable-fq = []
+
+[dependencies]
+getrandom = "0.2.7"
+sha3 = "0.10.6"
+
+[profile.release]
+opt-level = 3

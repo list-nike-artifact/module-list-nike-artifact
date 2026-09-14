@@ -1,0 +1,19 @@
+# Rust
+target/
+
+# Sage preparses .sage into .sage.py
+*.sage.py
+
+# fetched upstream tree (see params/fetch-estimator.sh)
+params/lattice-estimator/
+
+# build products of the C harnesses
+mlkem/bench
+x25519/bench
+coral/coral-c/build/
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
